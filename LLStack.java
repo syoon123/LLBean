@@ -7,11 +7,34 @@
 
 import java.util.LinkedList;
 
-
 public class LLStack<T> implements Stack<T> {
 
+    //instance vars
+    private LinkedList<T> _stack;
 
+    //methods
 
+    public LLStack() {
+	_stack = new LinkedList();
+    }
+
+    public T pop() {
+	if (isEmpty()) 
+	    return null;	
+	else 
+	    return _stack.removeFirst();
+    }
+
+    public void push(T a) {
+	_stack.addFirst(a);
+    }
+
+    public T peek(){
+	if (isEmpty())
+	    return null;
+	else
+	    return _stack.getFirst();
+    }
 
     //main method for testing
     public static void main( String[] args ) {
