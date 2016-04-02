@@ -7,22 +7,16 @@
       2. ...
       5. Profit!      
 
- * Simple scheme expression ( evaluate() )
- * 1. Iterate through the string and find the operator
- * 2. Store the operator (unload)
- * 3. Push the relevant numbers within the contained parentheses
- * 3. After all numbers are stored, evaluate
+ * Simple scheme expression (no inner expressions; evalExp()
+ * 1. Iterate through the string and find the operation.
+ * 2. Store the operation, and push the numbers in the 
+ *    relevant parentheses into the stack
+ * 3. After all numbers are stored, evaluate them depending
+ *    on the operation.
 
- * Complex expression (eval()):
- * 1. Look for first inner and outer parentheses. 
- * 2. Find the innermost (simple) expression.
- * 3. Evaluate the expression using the simple scheme expression algo
- * 4. Replace the expression in the string with the answer.
- * 5. Repeat 1-4 until you are left with one pair of parentheses.
- * 6. Return the answer to the final expression. 
 
- * STACK OF CHOICE: LLStack by Clyde Sinclair
- * b/c it is too legit to quit 
+ * STACK OF CHOICE: ____ by Clyde ____
+ * b/c ...
  ******************************************************/
 
 public class Scheme {

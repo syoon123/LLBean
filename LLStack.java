@@ -36,6 +36,11 @@ public class LLStack<T> implements Stack<T> {
 	    return _stack.getFirst();
     }
 
+
+    public boolean isEmpty(){
+	return (_stack.size() == 0);
+    }
+
     //main method for testing
     public static void main( String[] args ) {
 
