@@ -24,6 +24,51 @@ public class Scheme {
      ******************************************************/
     public static String evaluate( String expr ) 
     {
+	LLStack<String> stack = new LLStack<String>();
+	LLStack<String> tmp = new LLStack<String>();
+
+	int i=0;
+	while (i<expr.length()) {
+	    String curr = expr.substring(i,i+1);
+	    if (! (stack.peek().equals(")")) ) {
+		if (isNumber(curr)) {
+		    int tempindex = i;
+		    String toAdd = curr;
+		    while (!expr.substring(tempindex, tempindex+1).equals(" ")) {
+			toAdd += expr.substring(tempindex, tempindex+1);
+			tempindex++;
+		    }
+		    stack.push(toAdd);
+		    i = tempindex;
+		}
+		else if (stack.peek().equals(" "))
+		    i++;
+		else {
+		    stack.push(curr);
+		    i++;
+		}
+	    }
+	    else {
+		while (! (stack.peek().equals("(") )) {
+		    tmp.push(stack.pop());
+		}
+		String operation = tmp.pop();
+		int ans = Integer.parseInt(tmp.pop());
+		while (!tmp.isEmpty()) {
+		    if (operation.equals("+"))
+			ans += Integer.parseInt(tmp.pop());
+		    else if (operation.equals("*"))
+			ans *= Integer.parseInt(tmp.pop());
+		    else if (operation.equals("-"))
+			ans -= Integer.parseInt(tmp.pop());
+		}
+		stack.pop();
+		String a = new Integer(ans).toString();
+		stack.push(a);
+		i++;
+	    }
+	}
+	return stack.peek();
     }//end evaluate()
 
 
@@ -35,10 +80,10 @@ public class Scheme {
      ******************************************************/
     public static String unload( int op, Stack<String> numbers ) 
     {
+	return "";
     }//end unload()
 
 
-    /*
     //optional check-to-see-if-its-a-number helper fxn:
     public static boolean isNumber( String s ) {
         try {
@@ -49,13 +94,10 @@ public class Scheme {
 	    return false;
 	}
     }
-    */
-
 
     //main method for testing
     public static void main( String[] args ) {
 
-	/*v~~~~~~~~~~~~~~MAKE MORE~~~~~~~~~~~~~~v
 	String zoo1 = "( + 4 3 )";
 	System.out.println(zoo1);
 	System.out.println("zoo1 eval'd: " + evaluate(zoo1) );
@@ -75,7 +117,7 @@ public class Scheme {
 	System.out.println(zoo4);
 	System.out.println("zoo4 eval'd: " + evaluate(zoo4) );
 	//...-4
-          ^~~~~~~~~~~~~~~~AWESOME~~~~~~~~~~~~~~~^*/
+
     }//main
 
 }//end class Scheme
