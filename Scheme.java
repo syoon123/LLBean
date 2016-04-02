@@ -5,10 +5,24 @@
  * ALGORITHM for EVALUATING A SCHEME EXPRESSION:
       1. Steal underpants.
       2. ...
-      5. Profit!
- *
- * STACK OF CHOICE: ____ by Clyde ____
- * b/c ...
+      5. Profit!      
+
+ * Simple scheme expression ( evaluate() )
+ * 1. Iterate through the string and find the operator
+ * 2. Store the operator (unload)
+ * 3. Push the relevant numbers within the contained parentheses
+ * 3. After all numbers are stored, evaluate
+
+ * Complex expression (eval()):
+ * 1. Look for first inner and outer parentheses. 
+ * 2. Find the innermost (simple) expression.
+ * 3. Evaluate the expression using the simple scheme expression algo
+ * 4. Replace the expression in the string with the answer.
+ * 5. Repeat 1-4 until you are left with one pair of parentheses.
+ * 6. Return the answer to the final expression. 
+
+ * STACK OF CHOICE: LLStack by Clyde Sinclair
+ * b/c it is too legit to quit 
  ******************************************************/
 
 public class Scheme {
