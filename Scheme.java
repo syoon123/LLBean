@@ -23,9 +23,9 @@
 
       * STACK OF CHOICE: LLStack by Clyde Sinclair
       * b/c it is too legit to quit 
-      ******************************************************/
+******************************************************/
 
-public class Scheme {
+public class SchemeTest {
 
     /****************************************************** 
      * precond:  Assumes expr is a valid Scheme (prefix) expression,
@@ -40,26 +40,38 @@ public class Scheme {
     {
 	Stack<String> stack = new LLStack<String>();
 	Stack<String> tmp = new LLStack<String>();
+	String numPush = "";
+	
 	int i = 0;
-	while (i<expr.length()) {
+	while ( i < expr.length() ) {
+	    System.out.println("~~~~~~~~~~~~~~~NEWITERATION~~~~~~~~~~~~");
+	    System.out.println("Iter:"+i);
+	    System.out.println("stack:"+stack);
+
 	    String curr = expr.substring(i,i+1);
-	    if (!curr.equals(")")) {
-		String numPush = "";
-		if (isNumber(curr)) {
+	    System.out.println("curr:"+curr);
+
+
+	    if (!curr.equals(")")) { // push the elements into the stack if they are not )
+		System.out.println("numPush:"+numPush);
+		if (isNumber(curr)) { // if the curr is a number
+		    System.out.println("isNumber curr:"+curr);
 		    numPush += curr;
-		    i++;
+		    System.out.println("numPush after isNumber curr add:"+numPush);
 		}
-		else if (curr.equals(" ")){
-		    if (!numPush.equals("")) {
+		else if (curr.equals(" ")){ // if curr is white space
+		    System.out.println("     Inside of whiteSpace case");
+		    System.out.println("whiteSpace case numPush:" + numPush + " " + numPush.length());
+		     if (! (numPush.length() == 0)) { // and numPush is not empty
 			stack.push(numPush);
+			System.out.println("Whitespace numPush case stack:"+stack);
 			numPush = "";
-		    }
-		    i++;
+		     }
 		}
 		else {
-		    stack.push(curr);
-		    i++;
+		    stack.push(curr); // push curent element that is an operator
 		}
+		i++;
 	    }
 	    else {
 		while(!stack.peek().equals("(")) {
@@ -78,8 +90,10 @@ public class Scheme {
 		    tmp.pop();
 		    op = 3;
 		}
+		System.out.println("This means that I got to unloading");
+		System.out.println(tmp);
 		String simp = unload(op, tmp);
-		stack.pop();
+		//stack.pop();
 		stack.push(simp);
 		i++;
 	    }
@@ -97,6 +111,7 @@ public class Scheme {
 	public static String unload( int op, Stack<String> numbers ) 
 	{
 	    int result = Integer.parseInt(numbers.pop());
+	    System.out.println("This is the result " + result + ".");
 	    while (!numbers.isEmpty()) {
 		if (op==1) 
 		    result += Integer.parseInt(numbers.pop());	    
