@@ -67,16 +67,13 @@ public class Scheme {
 		    tmp.push(stack.pop());
 		}
 		int op;
-		if (tmp.peek().equals("+")) {
-		    tmp.pop();
+		if (tmp.pop().equals("+")) {
 		    op = 1;
 		}
 		else if (tmp.peek().equals("-")) {
-		    tmp.pop();
 		    op = 2;
 		}
 		else if (tmp.peek().equals("*")) {
-		    tmp.pop();
 		    op = 3;
 		}
 		String simp = unload(op, tmp);
@@ -99,7 +96,6 @@ public class Scheme {
 	 ******************************************************/
 	public static String unload( int op, Stack<String> numbers ) 
 	{
-	    op = Integer.parseInt(numbers.pop());
 	    int result = Integer.parseInt(numbers.pop());
 	    while (!numbers.peek().equals(")")) {
 		if (op==1) 
@@ -131,7 +127,7 @@ public class Scheme {
 	    System.out.println(zoo1);
 	    System.out.println("zoo1 eval'd: " + evaluate(zoo1) );
 	    //...7
-
+	    /*
 	    String zoo2 = "( + 4 ( * 2 5 ) 3 )";
 	    System.out.println(zoo2);
 	    System.out.println("zoo2 eval'd: " + evaluate(zoo2) );
@@ -146,7 +142,7 @@ public class Scheme {
 	    System.out.println(zoo4);
 	    System.out.println("zoo4 eval'd: " + evaluate(zoo4) );
 	    //...-4
-
+	    */
 	}//main
 
     }//end class Scheme
