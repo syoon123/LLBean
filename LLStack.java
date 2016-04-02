@@ -1,4 +1,9 @@
 /*****************************************************
+Team LLBean -- Sarah Yoon and Jason Mohabir
+APCS2 pd10
+HW23 -- Leon Leonwood Stack
+2016-04-01
+
  * class LLStack
  * Implements ADT stack as specified in local Stack.java
  * Generically typed
@@ -34,6 +39,10 @@ public class LLStack<T> implements Stack<T> {
 	    return null;
 	else
 	    return _stack.getFirst();
+    }
+
+    public boolean isEmpty() {
+	return _stack.size()==0;
     }
 
     //main method for testing
