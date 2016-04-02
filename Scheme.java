@@ -41,7 +41,7 @@ public class Scheme {
 	Stack<String> stack = new LLStack<String>();
 	Stack<String> tmp = new LLStack<String>();
 	int i = 0;
-	while (i<expr.length()-1) {
+	while (i<expr.length()) {
 	    String curr = expr.substring(i,i+1);
 	    if (!curr.equals(")")) {
 		String numPush = "";
@@ -62,42 +62,42 @@ public class Scheme {
 		}
 	    }
 	    else {
-		tmp.push(")");
 		while(!stack.peek().equals("(")) {
 		    tmp.push(stack.pop());
 		}
-		int op;
-		if (tmp.pop().equals("+")) {
+		int op = 0;
+		if (tmp.peek().equals("+")) {
+		    tmp.pop();
 		    op = 1;
 		}
 		else if (tmp.peek().equals("-")) {
+		    tmp.pop();
 		    op = 2;
 		}
 		else if (tmp.peek().equals("*")) {
+		    tmp.pop();
 		    op = 3;
 		}
 		String simp = unload(op, tmp);
+		stack.pop();
 		stack.push(simp);
-		while (!tmp.isEmpty()) {
-		    tmp.pop();
-		}
 		i++;
 	    }
 	}
 	return stack.peek();
     }//end evaluate()
 
-
+    
 	/****************************************************** 
 	 * precond:  Assumes top of input stack is a number.
 	 * postcond: Performs op on nums until closing paren is seen thru peek().
 	 *           Returns the result of operating on sequence of operands.
 	 *           Ops: + is 1, - is 2, * is 3
-	 ******************************************************/
+	 ******************************************************/    
 	public static String unload( int op, Stack<String> numbers ) 
 	{
 	    int result = Integer.parseInt(numbers.pop());
-	    while (!numbers.peek().equals(")")) {
+	    while (!numbers.isEmpty()) {
 		if (op==1) 
 		    result += Integer.parseInt(numbers.pop());	    
 		if (op==2)
@@ -105,9 +105,9 @@ public class Scheme {
 		if (op==3)
 		    result *= Integer.parseInt(numbers.pop());
 	    }
-	    return (result+"");
+	    return String.valueOf(result);
 	}//end unload()
-
+	 
 
 	//optional check-to-see-if-its-a-number helper fxn:
 	public static boolean isNumber( String s ) {
@@ -122,7 +122,12 @@ public class Scheme {
 
 	//main method for testing
 	public static void main( String[] args ) {
+	    Stack<String> test = new LLStack<String>();
+	    test.push("4");
+	    test.push("3");
+	    System.out.println( unload(1,test) );
 
+	    
 	    String zoo1 = "( + 4 3 )";
 	    System.out.println(zoo1);
 	    System.out.println("zoo1 eval'd: " + evaluate(zoo1) );
